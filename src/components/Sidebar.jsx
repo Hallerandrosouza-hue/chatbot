@@ -94,7 +94,6 @@ const Sidebar = () => {
         <SidebarGroup title="Principal">
           <SidebarItem to="/dashboard" icon={LayoutDashboard} label="Dashboard" activeColor={brandColor} />
           <SidebarItem to="/empresa" icon={Building2} label="Empresa" activeColor={brandColor} />
-          <SidebarItem to="/aparencia" icon={Paintbrush} label="Aparência" activeColor={brandColor} />
         </SidebarGroup>
 
         <SidebarGroup title="WhatsApp">
@@ -113,6 +112,7 @@ const Sidebar = () => {
 
         <SidebarGroup title="Sistema">
           <SidebarItem to="/relatorios" icon={BarChart3} label="Relatórios" activeColor={brandColor} />
+          <SidebarItem to="/aparencia" icon={Paintbrush} label="Aparência" activeColor={brandColor} />
           <SidebarItem to="/configuracoes" icon={Settings} label="Configurações" activeColor={brandColor} />
         </SidebarGroup>
       </div>

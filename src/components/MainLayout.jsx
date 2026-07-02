@@ -31,7 +31,14 @@ const Header = () => {
     if (saved) {
       try {
         const parsed = JSON.parse(saved)
-        if (parsed.theme) setTheme(parsed.theme)
+        if (parsed.theme) {
+          setTheme(parsed.theme)
+          if (parsed.theme === 'dark') {
+            document.documentElement.classList.add('dark')
+          } else {
+            document.documentElement.classList.remove('dark')
+          }
+        }
         if (parsed.primaryColor) setColor(parsed.primaryColor)
       } catch (e) {
         console.error(e)
@@ -46,14 +53,19 @@ const Header = () => {
   }, [])
 
   return (
-    <header className="h-16 border-b border-gray-250 bg-white flex items-center justify-between px-8 shrink-0">
-      <h2 className="text-[15px] font-bold text-gray-800 tracking-tight">{title}</h2>
+    <header className="h-16 border-b border-gray-250 dark:border-gray-800 bg-white dark:bg-gray-900 flex items-center justify-between px-8 shrink-0 transition-colors duration-300">
+      <h2 className="text-[15px] font-bold text-gray-800 dark:text-gray-100 tracking-tight">{title}</h2>
       
       <div className="flex items-center gap-6">
         <button 
           onClick={() => {
             const nextTheme = theme === 'light' ? 'dark' : 'light'
             setTheme(nextTheme)
+            if (nextTheme === 'dark') {
+              document.documentElement.classList.add('dark')
+            } else {
+              document.documentElement.classList.remove('dark')
+            }
             const saved = localStorage.getItem('bottgua_appearance_config')
             let configObj = {}
             if (saved) {
@@ -63,12 +75,13 @@ const Header = () => {
             localStorage.setItem('bottgua_appearance_config', JSON.stringify(configObj))
             window.dispatchEvent(new Event('bottgua_settings_changed'))
           }} 
-          className="text-gray-400 hover:text-gray-600 transition-colors"
+          className="text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300 transition-colors p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800"
+          title="Alternar Tema"
         >
           {theme === 'light' ? <Moon size={18} /> : <Sun size={18} className="text-amber-500" />}
         </button>
         <div 
-          className="w-8 h-8 rounded-full text-white flex items-center justify-center text-[10px] font-bold shadow-sm transition-all"
+          className="w-8 h-8 rounded-full text-white flex items-center justify-center text-[10px] font-bold shadow-sm transition-all cursor-pointer"
           style={{ backgroundColor: color }}
         >
           AD
@@ -80,7 +93,7 @@ const Header = () => {
 
 const MainLayout = () => {
   return (
-    <div className="flex h-screen w-full bg-[#FAFBFD] text-gray-800 font-sans">
+    <div className="flex h-screen w-full bg-[#FAFBFD] dark:bg-gray-950 text-gray-800 dark:text-gray-200 font-sans transition-colors duration-300">
       <Sidebar />
       <div className="flex flex-1 flex-col overflow-hidden">
         <Header />

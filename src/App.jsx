@@ -1,6 +1,9 @@
 import React from 'react'
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import MainLayout from './components/MainLayout'
+
+// Landing Page (capa antes do menu principal)
+import LandingPage from './pages/LandingPage'
 
 // Importando todas as páginas do Bottgua
 import DashboardPage from './pages/DashboardPage'
@@ -21,7 +24,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Navigate to="/dashboard" replace />} />
+        <Route path="/" element={<LandingPage />} />
         <Route element={<MainLayout />}>
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/empresa" element={<EmpresaPage />} />
