@@ -50,6 +50,7 @@ const SidebarGroup = ({ title, children }) => (
 const Sidebar = () => {
   const [brandName, setBrandName] = useState('Bottgua')
   const [brandColor, setBrandColor] = useState('#3B82F6')
+  const [brandLogoUrl, setBrandLogoUrl] = useState('')
 
   // Load brand name dynamically on mount and watch for changes
   const updateBrand = () => {
@@ -59,6 +60,8 @@ const Sidebar = () => {
         const parsed = JSON.parse(saved)
         if (parsed.systemName) setBrandName(parsed.systemName)
         if (parsed.primaryColor) setBrandColor(parsed.primaryColor)
+        if (parsed.logoUrl) setBrandLogoUrl(parsed.logoUrl)
+        else setBrandLogoUrl('')
       } catch (e) {
         console.error(e)
       }
@@ -77,10 +80,20 @@ const Sidebar = () => {
       <div className="h-16 flex items-center justify-between px-6 border-b border-sidebar-border sticky top-0 bg-sidebar-background z-10">
         <div className="flex items-center gap-2">
           <div 
-            className="w-6 h-6 text-white rounded text-[10px] font-bold flex items-center justify-center transition-all"
+            className="w-10 h-10 rounded overflow-hidden flex items-center justify-center transition-all"
             style={{ backgroundColor: brandColor }}
           >
-            {brandName.slice(0, 2).toUpperCase()}
+            {brandLogoUrl ? (
+              <img
+                src={brandLogoUrl}
+                alt={`${brandName} logo`}
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <span className="w-6 h-6 text-white rounded text-[10px] font-bold flex items-center justify-center">
+                {brandName.slice(0, 2).toUpperCase()}
+              </span>
+            )}
           </div>
           <span className="font-bold text-gray-800 text-sm tracking-tight">{brandName}</span>
         </div>

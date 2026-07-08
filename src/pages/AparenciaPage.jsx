@@ -151,14 +151,22 @@ const AparenciaPage = () => {
                 {/* Header preview */}
                 <div className="flex items-center justify-between pb-2.5 border-b border-gray-100">
                   <div className="flex items-center gap-2">
+                  {appearance.logoUrl ? (
+                    <img
+                      src={appearance.logoUrl}
+                      alt={`${appearance.systemName} logo`}
+                      className="w-5 h-5 rounded object-cover"
+                    />
+                  ) : (
                     <span 
                       className="w-5 h-5 rounded text-[10px] font-bold text-white flex items-center justify-center"
                       style={{ backgroundColor: appearance.primaryColor }}
                     >
                       {appearance.systemName.slice(0, 2).toUpperCase()}
                     </span>
-                    <span className="text-xs font-bold text-gray-700">{appearance.systemName}</span>
-                  </div>
+                  )}
+                  <span className="text-xs font-bold text-gray-700">{appearance.systemName}</span>
+                </div>
                   <span className="w-2 h-2 rounded-full bg-green-500"></span>
                 </div>
                 
